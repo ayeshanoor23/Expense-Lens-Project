@@ -1,0 +1,213 @@
+:root {
+    --primary: rgb(99, 106, 232);
+    --primary-light: rgba(99, 106, 232, 0.1);
+    --text: rgb(50, 56, 66);
+    --text-light: rgb(86, 94, 108);
+    --border: rgb(188, 193, 202);
+    --background: rgb(248, 249, 250);
+    --white: rgb(255, 255, 255);
+    --shadow: rgba(18, 15, 40, 0.12);
+}
+
+.ocr-pro-ocr-module {
+    background-color: var(--background);
+    box-shadow: 0px 3px 6px var(--shadow);
+    display: flex;
+    max-width: 480px;
+    width: 100%;
+    flex-direction: column;
+    overflow: hidden;
+    margin: 0 auto;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.container {
+    background: linear-gradient(135deg, rgba(99, 106, 232, 0.1), rgba(99, 106, 232, 0.2));
+    padding: 20px;
+    color: var(--text);
+}
+
+.container-2 {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.div-2 {
+    color: var(--text-light);
+    font-size: 14px;
+}
+
+.optical-character-recognition {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.header-menu {
+    display: flex;
+    gap: 24px;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--primary-light);
+}
+
+.frame, .frame-2, .frame-3 {
+    color: var(--text-light);
+    font-size: 14px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.frame {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.rectangle {
+    height: 4px;
+    background-color: var(--primary);
+    border-radius: 2px;
+    margin-top: 8px;
+}
+
+.container-3 {
+    background-color: var(--background);
+    padding: 24px;
+}
+
+.image-upload {
+    font-size: 20px;
+    margin: 0 0 16px;
+}
+
+.div-3, .div-4 {
+    display: flex;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.button, .button-2, .button-3 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    border: 1px solid var(--primary);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 14px;
+}
+
+.button {
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+.button-2, .button-3 {
+    background-color: transparent;
+    color: var(--primary);
+}
+
+.container-4 {
+    background-color: var(--white);
+    padding: 24px;
+}
+
+.textarea {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px;
+    min-height: 120px;
+    margin: 16px 0;
+    position: relative;
+}
+
+.div-6 {
+    display: flex;
+    gap: 12px;
+}
+
+.button-4, .button-5, .button-6 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    background-color: var(--primary);
+    color: var(--white);
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.container-5 {
+    background-color: var(--background);
+    padding: 24px;
+    text-align: center;
+}
+
+.slider {
+    margin: 16px 0;
+    background-color: var(--text);
+    border-radius: 3px;
+    height: 6px;
+    overflow: hidden;
+}
+
+.rectangle-2 {
+    background-color: var(--primary);
+    height: 100%;
+    width: 60%;
+    transition: width 0.3s;
+}
+
+.container-18 {
+    margin-top: auto;
+    border-top: 1px solid var(--border);
+    padding: 16px;
+    text-align: center;
+}
+
+.img, .img-2, .img-3 {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+@media (max-width: 480px) {
+    .div-3, .div-4, .div-6 {
+        flex-direction: column;
+    }
+    
+    .button, .button-2, .button-3,
+    .button-4, .button-5, .button-6 {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+    }
+}
+
+[role="button"]:focus,
+button:focus {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+}

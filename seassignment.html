@@ -1,0 +1,460 @@
+<div class="ocr-module" role="main">
+
+    <div class="header-content">
+      <h1 class="header-title">Optical Character Recognition</h1>
+      <nav class="nav-menu" role="navigation">
+        <div class="nav-item active" tabindex="0" role="tab" aria-selected="true">
+          Document Upload
+          <div class="nav-indicator"></div>
+        </div>
+        <div class="nav-item" tabindex="0" role="tab" aria-selected="false">Image Recognition</div>
+        <div class="nav-item" tabindex="0" role="tab" aria-selected="false">Settings</div>
+      </nav>
+    </div>
+  </header>
+
+  <section class="upload-section" aria-label="Image Upload">
+    <h2 class="upload-title">Image Upload</h2>
+    <div class="upload-buttons">
+      <button class="btn btn-primary" id="uploadBtn">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/0a89d9c84fbc11e7aa684bed9fb0c99e39ef8cd888eeef9c5fb4635fbedac9db?placeholderIfAbsent=true&apiKey=9c57376e58b948ef9d9c653dc00f4ea4" alt="" class="btn-icon">
+        Upload Image
+      </button>
+      <button class="btn btn-outline" id="takePictureBtn">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/5bacbc040edef3ecf77e7921fc921829626be8cb172d929805a627658e381a8c?placeholderIfAbsent=true&apiKey=9c57376e58b948ef9d9c653dc00f4ea4" alt="" class="btn-icon">
+        Take Picture
+      </button>
+    </div>
+    <div class="preview-section">
+      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/90b2fa0fafc09d4aca8d17544a2562c35137987d8866e2925ee3f951a5b8978f?placeholderIfAbsent=true&apiKey=9c57376e58b948ef9d9c653dc00f4ea4" alt="Preview of uploaded document" class="preview-image" id="previewImage">
+      <button class="btn btn-outline" id="selectFileBtn">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/934232a23a1b74cde2ded0eeca774cda9e51e08645e43cc52d5b87f3a5425593?placeholderIfAbsent=true&apiKey=9c57376e58b948ef9d9c653dc00f4ea4" alt="" class="btn-icon">
+        Select File
+      </button>
+      <input type="file" id="fileInput" accept="image/*" class="visually-hidden">
+    </div>
+  </section>
+
+  <section class="text-recognition" aria-label="Text Recognition">
+    <h2 class="upload-title">Text Recognition</h2>
+    <div class="text-area" role="textbox" aria-label="Recognized text output" id="recognizedText" contenteditable="true">
+      Recognized text will appear here...
+    </div>
+    <div class="action-buttons">
+      <button class="btn btn-primary" id="copyBtn" aria-label="Copy text">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/934fbbb51c2e4dce0b0f2fba1ee7aba20bf135c13909a64423f68c3fe366eb4e?placeholderIfAbsent=true&apiKey=9c57376e58b948ef9d9c653dc00f4ea4" alt="" class="btn-icon">
+        Copy
+      </button>
+      <button class="btn btn-primary" id="downloadBtn" aria-label="Download text">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/314bb7ccbb02755491c094588680965a5dee74f6f99a2cc63824739605d75e9a?placeholderIfAbsent=true&apiKey=9c57376e58b948ef9d9c653dc00f4ea4" alt="" class="btn-icon">
+        Download
+      </button>
+      <button class="btn btn-primary" id="rerunBtn" aria-label="Rerun OCR">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/0c51ad40034cfdd26664b403f2411e64b5100fda9f296fb59a6bca6d86ca7240?placeholderIfAbsent=true&apiKey=9c57376e58b948ef9d9c653dc00f4ea4" alt="" class="btn-icon">
+        Rerun OCR
+      </button>
+    </div>
+  </section>
+
+  <section class="progress-section" aria-label="Processing Status">
+    <div class="progress-status" role="status" aria-live="polite" id="progressStatus">
+      Ready
+    </div>
+    <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <div class="ocr-status" role="status" aria-live="polite" id="ocrStatus">
+      Waiting for image...
+    </div>
+  </section>
+
+  <footer class="settings-bar">
+    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/f8611c97066483921310038696c7151646678e9a0f57779b497e72189adb5525?placeholderIfAbsent=true&apiKey=9c57376e58b948ef9d9c653dc00f4ea4" alt="Settings" class="settings-icon">
+    <span class="settings-text">settings</span>
+  </footer>
+</div>
+
+<style>
+.ocr-module {
+  background: #f8f9fa;
+  box-shadow: 0 3px 6px rgba(18,15,40,.12);
+  max-width: 480px;
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.header {
+  background: #fff;
+  padding: 0 0 12px;
+}
+
+.header-logo {
+  width: 100%;
+  aspect-ratio: 9.71/1;
+  object-fit: contain;
+}
+
+.header-content {
+  margin: 12px 0 0;
+  padding: 0 20px;
+}
+
+.header-title {
+  color: #323842;
+  font: 18px/2 Archivo, sans-serif;
+  margin: 4px 0;
+}
+
+.nav-menu {
+  display: flex;
+  margin-top: 12px;
+  color: #565e6c;
+  font: 14px/2 Inter, sans-serif;
+}
+
+.nav-item {
+  border-radius: 6px;
+  padding: 15px 12px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.nav-item:focus {
+  outline: 2px solid #636ae8;
+  outline-offset: 2px;
+}
+
+.nav-item.active {
+  color: #636ae8;
+  font-weight: 700;
+}
+
+.nav-indicator {
+  border-radius: 2px;
+  background: #636ae8;
+  height: 4px;
+  margin-top: 11px;
+  transition: transform 0.3s;
+}
+
+.upload-section {
+  background: #f3f4f6;
+  padding: 20px 30px;
+}
+
+.upload-title {
+  color: #171a1f;
+  font: 20px Archivo, sans-serif;
+  margin-bottom: 10px;
+}
+
+.upload-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 18px;
+  border-radius: 8px;
+  font: 14px/2 Inter, sans-serif;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn:focus {
+  outline: 2px solid #636ae8;
+  outline-offset: 2px;
+}
+
+.btn-primary {
+  background: #636ae8;
+  color: #fff;
+  border: 1px solid transparent;
+}
+
+.btn-primary:hover {
+  background: #5158c7;
+}
+
+.btn-outline {
+  background: transparent;
+  color: #636ae8;
+  border: 1px solid #636ae8;
+}
+
+.btn-outline:hover {
+  background: rgba(99,106,232,0.1);
+}
+
+.btn-icon {
+  width: 16px;
+  aspect-ratio: 1;
+}
+
+.preview-section {
+  display: flex;
+  gap: 10px;
+}
+
+.preview-image {
+  width: 150px;
+  aspect-ratio: 1.79;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+.text-recognition {
+  background: #f8f9fa;
+  padding: 20px 30px;
+}
+
+.text-area {
+  border: 1px solid #bcc1ca;
+  border-radius: 6px;
+  padding: 8px 12px;
+  min-height: 100px;
+  margin: 10px 0;
+  width: 100%;
+  max-width: 330px;
+  font: 14px/2 Inter, sans-serif;
+  transition: border-color 0.3s;
+}
+
+.text-area:focus {
+  outline: none;
+  border-color: #636ae8;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.progress-section {
+  background: #f8f9fa;
+  padding: 20px 45px;
+  text-align: center;
+}
+
+.progress-status {
+  color: #323842;
+  font: 14px/2 Inter, sans-serif;
+  margin-bottom: 10px;
+}
+
+.progress-bar {
+  background: #323842;
+  border-radius: 3px;
+  height: 6px;
+  margin: 8px 0;
+  overflow: hidden;
+}
+
+.progress-fill {
+  background: #636ae8;
+  height: 100%;
+  width: 0;
+  transition: width 0.3s ease-in-out;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
+
+.settings-bar {
+  background: #fff;
+  border-radius: 16px 16px 0 0;
+  box-shadow: 0 0 2px rgba(23,26,31,.12);
+  margin-top: 52px;
+  padding: 6px 48px 0 0;
+  display: flex;
+  align-items: center;
+}
+
+.settings-icon {
+  width: 24px;
+  aspect-ratio: 1;
+}
+
+.settings-text {
+  color: #7f55e0;
+  font: 12px/20px Inter, sans-serif;
+  margin-top: 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .nav-item,
+  .nav-indicator,
+  .progress-fill,
+  .text-area {
+    transition: none;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .upload-buttons,
+  .action-buttons {
+    flex-direction: column;
+  }
+  
+  .preview-section {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const fileInput = document.getElementById('fileInput');
+  const previewImage = document.getElementById('previewImage');
+  const uploadBtn = document.getElementById('uploadBtn');
+  const takePictureBtn = document.getElementById('takePictureBtn');
+  const selectFileBtn = document.getElementById('selectFileBtn');
+  const recognizedText = document.getElementById('recognizedText');
+  const copyBtn = document.getElementById('copyBtn');
+  const downloadBtn = document.getElementById('downloadBtn');
+  const rerunBtn = document.getElementById('rerunBtn');
+  const progressFill = document.getElementById('progressFill');
+  const progressStatus = document.getElementById('progressStatus');
+  const ocrStatus = document.getElementById('ocrStatus');
+
+  let currentImage = null;
+
+  const simulateOCR = async (image) => {
+    progressStatus.textContent = 'Processing...';
+    ocrStatus.textContent = 'Processing...';
+    
+    let progress = 0;
+    progressFill.style.width = '0%';
+    
+    return new Promise((resolve) => {
+      const interval = setInterval(() => {
+        progress += 10;
+        progressFill.style.width = `${progress}%`;
+        progressFill.setAttribute('aria-valuenow', progress);
+        
+        if (progress >= 100) {
+          clearInterval(interval);
+          progressStatus.textContent = 'Complete';
+          ocrStatus.textContent = 'OCR Successful';
+          resolve('Sample OCR text result for the uploaded image.');
+        }
+      }, 200);
+    });
+  };
+
+  const handleFileSelect = async (file) => {
+    if (!file) return;
+    
+    if (!file.type.startsWith('image/')) {
+      alert('Please select an image file.');
+      return;
+    }
+
+    currentImage = file;
+    const reader = new FileReader();
+    
+    reader.onload = async (e) => {
+      previewImage.src = e.target.result;
+      previewImage.alt = `Preview of ${file.name}`;
+      
+      const result = await simulateOCR(file);
+      recognizedText.textContent = result;
+    };
+    
+    reader.readAsDataURL(file);
+  };
+
+  uploadBtn.addEventListener('click', () => fileInput.click());
+  
+  selectFileBtn.addEventListener('click', () => fileInput.click());
+  
+  fileInput.addEventListener('change', (e) => {
+    handleFileSelect(e.target.files[0]);
+  });
+
+  takePictureBtn.addEventListener('click', async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      const video = document.createElement('video');
+      video.srcObject = stream;
+      await video.play();
+
+      const canvas = document.createElement('canvas');
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      canvas.getContext('2d').drawImage(video, 0, 0);
+      
+      canvas.toBlob((blob) => {
+        handleFileSelect(new File([blob], 'camera-capture.jpg', { type: 'image/jpeg' }));
+      }, 'image/jpeg');
+      
+      stream.getTracks().forEach(track => track.stop());
+    } catch (err) {
+      alert('Unable to access camera. Please ensure camera permissions are granted.');
+    }
+  });
+
+  copyBtn.addEventListener('click', () => {
+    navigator.clipboard.writeText(recognizedText.textContent)
+      .then(() => {
+        const originalText = copyBtn.textContent;
+        copyBtn.textContent = 'Copied!';
+        setTimeout(() => copyBtn.textContent = originalText, 2000);
+      })
+      .catch(() => alert('Failed to copy text. Please try again.'));
+  });
+
+  downloadBtn.addEventListener('click', () => {
+    const blob = new Blob([recognizedText.textContent], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'ocr-result.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
+
+  rerunBtn.addEventListener('click', async () => {
+    if (currentImage) {
+      const result = await simulateOCR(currentImage);
+      recognizedText.textContent = result;
+    }
+  });
+
+  document.querySelectorAll('.nav-item').forEach(item => {
+    item.addEventListener('click', () => {
+      document.querySelectorAll('.nav-item').forEach(nav => {
+        nav.classList.remove('active');
+        nav.setAttribute('aria-selected', 'false');
+      });
+      item.classList.add('active');
+      item.setAttribute('aria-selected', 'true');
+    });
+
+    item.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        item.click();
+      }
+    });
+  });
+});
+</script>

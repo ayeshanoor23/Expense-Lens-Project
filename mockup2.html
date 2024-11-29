@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile Management</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="root"></div>
+    <script src="user-profile-management.js"></script>
+</body>
+</html>
+
+
+
+
+<style>
+
+    .profile-management-wrapper {
+      background: #fff;
+      box-shadow: 0 3px 6px rgba(18,15,40,.12);
+      display: flex;
+      max-width: 480px;
+      width: 100%;
+      flex-direction: column;
+      overflow: hidden;
+      margin: 0 auto;
+    }
+    
+    .header {
+      background: #fff;
+      display: flex;
+      width: 100%;
+      padding: 0 0 12px;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .header-logo {
+      width: 100%;
+      aspect-ratio: 9.71/1;
+      object-fit: contain;
+    }
+    
+    .profile-header {
+      display: flex;
+      margin: 12px auto 0;
+      width: 100%;
+      max-width: 350px;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .profile-title {
+      color: #000;
+      font: 400 18px/36px Archivo, sans-serif;
+    }
+    
+    .profile-actions {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+    
+    .notification-icon {
+      width: 28px;
+      aspect-ratio: 1;
+    }
+    
+    .profile-avatar {
+      width: 36px;
+      aspect-ratio: 1;
+      border-radius: 18px;
+    }
+    
+    .nav-menu {
+      display: flex;
+      margin: 12px auto 0;
+      width: 100%;
+      max-width: 321px;
+      color: #565e6c;
+      font: 400 14px/28px Inter, sans-serif;
+    }
+    
+    .nav-item {
+      border-radius: 6px;
+      padding: 15px 12px;
+      color: inherit;
+      text-decoration: none;
+    }
+    
+    .nav-item.active {
+      color: #636ae8;
+      font-weight: 700;
+    }
+    
+    .nav-indicator {
+      border-radius: 2px;
+      background: #636ae8;
+      height: 4px;
+      margin-top: 11px;
+    }
+    
+    .section-header {
+      padding: 20px 30px;
+      background: #fff;
+    }
+    
+    .section-title {
+      color: #000;
+      font: 400 20px Archivo, sans-serif;
+    }
+    
+    .section-description {
+      color: #000;
+      font: 400 14px/22px Inter, sans-serif;
+      margin-top: 5px;
+    }
+    
+    .profile-info {
+      padding: 20px;
+      background: #fff;
+    }
+    
+    .profile-details {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    
+    .profile-photo {
+      width: 50px;
+      aspect-ratio: 1;
+      border-radius: 25px;
+    }
+    
+    .user-info {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font: 400 14px/28px Inter, sans-serif;
+    }
+    
+    .contact-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-top: 8px;
+      max-width: 280px;
+    }
+    
+    .edit-button {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 5px 16px;
+      border-radius: 8px;
+      background: #636ae8;
+      color: #fff;
+      font: 400 11px/22px Inter, sans-serif;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .edit-icon {
+      width: 12px;
+      aspect-ratio: 1;
+    }
+    
+    .activity-section {
+      padding: 20px;
+      background: #fff;
+    }
+    
+    .activity-cards {
+      display: flex;
+      gap: 16px;
+      margin-top: 26px;
+    }
+    
+    .activity-card {
+      flex: 1;
+      padding: 12px;
+      border-radius: 6px;
+      background: #fff;
+      box-shadow: 0 0 2px rgba(23,26,31,.12);
+    }
+    
+    .activity-image {
+      width: 143px;
+      aspect-ratio: 1.08;
+      border-radius: 8px;
+    }
+    
+    .activity-title {
+      color: #171a1f;
+      font: 700 14px/28px Inter, sans-serif;
+      margin: 6px 0;
+    }
+    
+    .activity-detail {
+      color: #90959f;
+      font: 400 12px/24px Inter, sans-serif;
+    }
+    
+    .view-details {
+      display: inline-block;
+      margin-top: 6px;
+      padding: 6px 37px;
+      border: 1px solid #636ae8;
+      border-radius: 4px;
+      color: #636ae8;
+      text-decoration: none;
+      font: 400 12px/24px Inter, sans-serif;
+    }
+    
+    .controls-section {
+      padding: 21px 20px;
+      background: #fff;
+    }
+    
+    .deactivate-button {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 10px;
+      padding: 7px 12px;
+      border-radius: 8px;
+      background: #ff0000;
+      color: #fff;
+      font: 400 14px/28px Inter, sans-serif;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .deactivate-icon {
+      width: 16px;
+      aspect-ratio: 1;
+    }
+    
+    .reason-select,
+    .notes-textarea {
+      width: 100%;
+      margin-top: 9px;
+      padding: 7px 12px;
+      border: 1px solid #bcbfca;
+      border-radius: 6px;
+      font: 400 14px/28px Inter, sans-serif;
+    }
+    
+    .notes-textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+    
+    .admin-notes {
+      padding: 21px 20px;
+      background: #fff;
+    }
+    
+    .notes-field {
+      margin-top: 9px;
+      padding: 8px 12px 2px;
+      border: 1px solid #bcbfca;
+      border-radius: 6px;
+      font: 400 14px/22px Inter, sans-serif;
+    }
+    
+    .notes-input {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .notes-icon {
+      width: 14px;
+      aspect-ratio: 1;
+    }
+    
+    .expand-icon {
+      width: 12px;
+      aspect-ratio: 1;
+      align-self: flex-end;
+      margin-top: 4px;
+    }
+    
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      border: 0;
+    }
+    </style>
+    
+    <main class="profile-management-wrapper">
+      <header class="header">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/a26cb1405fde90be5dcff3b350cf1390dc2854855c1a6bb87c0c34003392c750?placeholderIfAbsent=true&apiKey=9c57376e58b948ef9d9c653dc00f4ea4" alt="Company Logo" class="header-logo">
+        
+        <div class="profile-header">
+          <h1 class="profile-title">User Profile Management</h1>
+          <div class="profile-actions">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/01301efe7f23021193e322ed86987624def6a44cbcdfdaa82ecc4e45c1247d66?placeholderIfAbsent=true&apiKey=9c57376e58b948ef9d9c653dc00f4ea4" alt="Notifications" class="notification-icon">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/43d9e2fb3b8470a893df5e1a80bde154d2a8c7a82becee8f8c5d3d5df7875af2?placeholderIfAbsent=true&apiKey=9c57376e58b948ef9d9c653dc00f4ea4" alt="User Avatar" class="profile-avatar">
+          </div>
+        </div>
+    
+        <nav class="nav-menu" aria-label="Main Navigation">
+          <a href="#dashboard" class="nav-item active">
+            Dashboard
+            <div class="nav-indicator"></div>
+          </a>
+          <a href="#user-management" class="nav-item">User Management</a>
+          <a href="#reports" class="nav-item">Reports</a>
+        </nav>
+      </header>
+    
+      <section class="section-header">
+        <h2 class="section-title">User Profile Management</h2>
+        <p class="section-description">Admins can view, edit, deactivate, or suspend user profiles.</p>
+      </section>
+    
+      <section class="profile-info" aria-label="User Profile Information">
+        <h3 class="section-title">User Profile Information</h3>
+        
+        <div class="profile-details">
+          <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/7e194133f1bbcc630f60a6868f55a3358d6b4ea3140e548b9923ef420e5571d2?placeholderIfAbsent=true&apiKey=9c57376e58b948ef9d9c653dc00f4ea4" alt="Jane Doe's Profile Picture" class="profile-photo">
+          <div class="user-info">
+            <p>Name: Jane Doe</p>
+            <p>Email: jane.doe@example.com</p>
+          </div>
+        </div>
+    
+        <div class="contact-info">
+          <div class="user-info">
+            <p>Phone: +9876543210</p>
+            <p>Subscription: Premium</p>
+          </div>
+          <button class="edit-button" aria-label="Edit Profile">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/2429e2090c4abaa5c0239f244e593716b086d0bf7037a48e04e148e1e221a7cd?placeholderIfAbsent=true&apiKey=9c57376e58b948ef9d9c653dc00f4ea4" alt="" class="edit-icon">
+            Edit
+          </button>
+        </div>
+      </section>
+    
+      <section class="activity-section" aria-label="Account Activity">
+        <h3 class="section-title">Account Activity</h3>
+        
+        <div class="activity-cards">
+          <div class="activity-card">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/ed13dff61591111f7b2180cccb1498dc0947da3375c97df4f126837e0eb37a3d?placeholderIfAbsent=true&apiKey=9c57376e58b948ef9d9c653dc00f4ea4" alt="Login Activity Graph" class="activity-image">
+            <h4 class="activity-title">Login History</h4>
+            <p class="activity-detail">Last login: Oct 10, 2023</p>
+            <p class="activity-detail">IP address: 192.168.1.1</p>
+            <a href="#view-login-history" class="view-details">View Details</a>
+          </div>
+    
+          <div class="activity-card">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/10864d56c65a904c29a97dd77dcdf51d681ffedd968ac796764f03a2b4f485c7?placeholderIfAbsent=true&apiKey=9c57376e58b948ef9d9c653dc00f4ea4" alt="Transaction Activity Graph" class="activity-image">
+            <h4 class="activity-title">Transaction History</h4>
+            <p class="activity-detail">Last transaction: Oct 8, 2023</p>
+            <p class="activity-detail">Amount: $250.00</p>
+            <a href="#view-transaction-history" class="view-details">View Details</a>
+          </div>
+        </div>
+      </section>
+    
+      <section class="controls-section" aria-label="Account Status Controls">
+        <h3 class="section-title">Account Status Controls</h3>
+        
+        <form id="deactivateForm">
+          <button type="button" class="deactivate-button">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/a075b733f82856bd56f0f1a60e925ea0a1a61a6a1b8a300f31474da8764beffb?placeholderIfAbsent=true&apiKey=9c57376e58b948ef9d9c653dc00f4ea4" alt="" class="deactivate-icon">
+            Deactivate Account
+          </button>
+    
+          <label for="deactivateReason" class="visually-hidden">Select Deactivation Reason</label>
+          <select id="deactivateReason" name="deactivateReason" class="reason-select" required>
+            <option value="">Select Reason</option>
+            <option value="inactive">Account Inactive</option>
+            <option value="violation">Terms Violation</option>
+            <option value="requested">User Requested</option>
+          </select>
+    
+          <label for="deactivateNotes" class="visually-hidden">Deactivation Notes</label>
+          <textarea id="deactivateNotes" name="deactivateNotes" class="notes-textarea" 
+            placeholder="Add notes here..." required></textarea>
+        </form>
+      </section>
+    
+      <section class="admin-notes" aria-label="Administrative Notes">
+        <h3 class="section-title">Admin Notes</h3>
+        
+        <div class="notes-field">
+          <div class="notes-input">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/ef8c2a2a6a4fc7f9ea6eff348a3f55de5780acdf32a47c9126b7b4a7ce02f733?placeholderIfAbsent=true&apiKey=9c57376e58b948ef9d9c653dc00f4ea4" alt="" class="notes-icon">
+            <label for="adminNotes" class="visually-hidden">Administrative Notes</label>
+            <textarea id="adminNo
